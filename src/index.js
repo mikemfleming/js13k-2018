@@ -3,7 +3,7 @@ import Player from './actors/player';
 import Cat from './actors/cat';
 
 const player = new Player({ x: 250, y: 730 });
-const cat = new Cat({ x: 250, y: 375 })
+const cat = new Cat({ x: 250, y: 375 });
 
 const loop = kontra.gameLoop({
 	update () {

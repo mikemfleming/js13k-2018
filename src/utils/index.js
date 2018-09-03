@@ -1,20 +1,28 @@
-import kontra from '../kontra'
+import kontra from '../kontra';
 
-export const keepInArena = sprite => { // refactor with constants
-	if (sprite.x <= 0) {
-		sprite.x = 0;
+import {
+	MIN_WIDTH,
+	MIN_HEIGHT,
+	MAX_WIDTH,
+	MAX_HEIGHT,
+} from '../constants';
+
+// might be possible to do this with clamp
+export const keepInArena = sprite => {
+	if (sprite.x <= MIN_WIDTH) {
+		sprite.x = MIN_WIDTH;
 	}
 
-	if (sprite.x >= 500 - sprite.width) {
-		sprite.x = 500 - sprite.width;
+	if (sprite.x >= MAX_WIDTH - sprite.width) {
+		sprite.x = MAX_WIDTH - sprite.width;
 	}
 
-	if (sprite.y <= 0) {
-		sprite.y = 0;
+	if (sprite.y <= MIN_HEIGHT) {
+		sprite.y = MIN_HEIGHT;
 	}
 
-	if (sprite.y >= 750 - sprite.height) { // refactor with constants
-		sprite.y = 750 - sprite.height;
+	if (sprite.y >= MAX_HEIGHT - sprite.height) {
+		sprite.y = MAX_HEIGHT - sprite.height;
 	}
 };
 
