@@ -18,6 +18,7 @@ export default class Player {
 		});
 
 		this.speed = 250;
+		this.coding = false;
 	}
 
 	update () {
@@ -26,6 +27,8 @@ export default class Player {
 		const direction = normalize(deltaPos.x, deltaPos.y);
 		const s = this.speed / 60;
 		let vel = scale(direction.x, direction.y, s);
+
+		this.coding = kontra.keys.pressed('space');
 		
 		this.sprite.dx = vel.x;
 		this.sprite.dy = vel.y;
@@ -42,4 +45,15 @@ export default class Player {
 			playerY: this.sprite.y - this.sprite.height * 0.5,
 		}
 	}
+
+	getDimensions () {
+		return {
+			xMin: this.sprite.x,
+			yMin: this.sprite.y,
+			xMax: this.sprite.x + this.sprite.width,
+			yMax: this.sprite.y + this.sprite.height,
+		}
+	}
+
+	isCoding () { return this.coding; }
 }
