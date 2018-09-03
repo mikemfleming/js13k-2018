@@ -26,24 +26,22 @@ export const keepInArena = sprite => {
 	}
 };
 
-export const handlePlayerMovement = sprite => {
+export const getNewVectorP = vector => {
 	if (kontra.keys.pressed('left')){
-		sprite.dx = -5;
+		vector.add(kontra.vector(-100, 0));
 	}
-	else if (kontra.keys.pressed('right')) {
-		sprite.dx = 5;
-	}
-	else {
-		sprite.dx = 0;
+	
+	if (kontra.keys.pressed('right')) {
+		vector.add(kontra.vector(100, 0));
 	}
 
 	if (kontra.keys.pressed('up')) {
-		sprite.dy = -5;
+		vector.add(kontra.vector(0, -100));
 	}
-	else if (kontra.keys.pressed('down')) {
-		sprite.dy = 5;
+	
+	if (kontra.keys.pressed('down')) {
+		vector.add(kontra.vector(0, 100));
 	}
-	else {
-		sprite.dy = 0;
-	}
+
+	return vector;
 }
