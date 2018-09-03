@@ -47,11 +47,10 @@ function scale (x, y, s) {
 
 function normalize (x, y) {
     const magnitude = getMagnitude(x, y);
-	if (magnitude == 0) 
-	{
+	if (magnitude == 0) {
 		return kontra.vector(0,0);
 	}
-    return kontra.vector(x / magnitude, y / magnitude)
+  return kontra.vector(x / magnitude, y / magnitude)
 }
 
 function getMagnitude (x, y) {

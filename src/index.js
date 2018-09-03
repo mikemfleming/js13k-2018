@@ -8,10 +8,9 @@ const cat = new Cat({ x: 250, y: 375 })
 const loop = kontra.gameLoop({
 	update () {
 		player.update();
-		cat.update({
-			playerX: player.sprite.x,
-			playerY: player.sprite.y,
-		});
+		
+		const { playerX, playerY } = player.getCenter();
+		cat.update({ playerX, playerY });
 	},
 
 	// paint the new world

@@ -19,4 +19,11 @@ export default class Player {
 	}
 	
 	render () { this.sprite.render(); }
+
+	getCenter () {
+		return {
+			playerX: this.sprite.x - this.sprite.width * 0.5,
+			playerY: this.sprite.y - this.sprite.height * 0.5,
+		}
+	}
 }
