@@ -17,7 +17,7 @@ export default class Player {
 			color: 'blue'
 		});
 
-		this.speed = 250;
+		this.speed = 300;
 		this.coding = false;
 	}
 
@@ -25,7 +25,7 @@ export default class Player {
 		const currentPosition = kontra.vector(0, 0);
 		const deltaPos = getNewVectorP(currentPosition);
 		const direction = normalize(deltaPos.x, deltaPos.y);
-		const s = this.speed / 60;
+		const s = (this.coding ? this.speed * 0.5 : this.speed) / 60; // moves slow when coding
 		let vel = scale(direction.x, direction.y, s);
 
 		this.coding = kontra.keys.pressed('space');

@@ -1,16 +1,15 @@
 import kontra from '../kontra';
 
 import {
-	scale,
-	normalize,
-	getMagnitude,
-} from '../utils';
+	MAX_HEIGHT,
+	MAX_WIDTH,
+} from '../constants';
 
 export default class Commit {
 	constructor (props) {
 		this.sprite = kontra.sprite({
-			x: 10,
-			y: 10,
+			x: (Math.random() * 500) - 30,
+			y: (Math.random() * 750) - 30,
 			width: 30,
 			height: 30,
 			color: 'gold',
@@ -27,6 +26,13 @@ export default class Commit {
 	
 	render () { this.sprite.render(); }
 
+	isPushed () {			
+		const onXaxis = this.sprite.x > MAX_WIDTH * 0.5 - 150 * 0.5 && this.sprite.x < MAX_WIDTH * 0.5 + 150 * 0.5; // gross disgusting hack
+		const onYaxis = this.sprite.y > MAX_HEIGHT - 100;
+
+		return onXaxis && onYaxis;
+	}
+
 	// maybe this belongs elsewhere
 	isTouching (player) {
 		const leftOfPlayer = player.xMin >= this.sprite.x && player.xMin <= this.sprite.x + this.sprite.width;
@@ -37,7 +43,7 @@ export default class Commit {
 		const onXaxis = leftOfPlayer || rightOfPlayer;
 		const onYaxis = topOfPlayer || bottomOfPlayer;
 
-		return onXaxis && onYaxis;
+		return onXaxis && onYaxis;	
 	}
 }
 
