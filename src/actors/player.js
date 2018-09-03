@@ -1,5 +1,11 @@
 import kontra from '../kontra'
-import { keepInArena, getNewVectorP } from '../utils';
+
+import {
+	scale,
+	normalize,
+	keepInArena,
+	getNewVectorP,
+} from '../utils';
 
 export default class Player {
 	constructor (props) {
@@ -36,17 +42,4 @@ export default class Player {
 			playerY: this.sprite.y - this.sprite.height * 0.5,
 		}
 	}
-}
-
-function normalize (x, y) {
-	const magnitude = getMagnitude(x, y);
-	return kontra.vector(x / magnitude, y / magnitude)
-}
-
-function scale (x, y, s) {
-	return kontra.vector(x * s, y *s);
-}
-
-function getMagnitude (x, y) {
-	return Math.sqrt((x * x) + (y * y));
 }

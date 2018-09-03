@@ -1,5 +1,11 @@
 import kontra from '../kontra';
 
+import {
+	scale,
+	normalize,
+	getMagnitude,
+} from '../utils';
+
 export default class Cat {
 	constructor (props) {
 		this.sprite = kontra.sprite({
@@ -39,20 +45,4 @@ export default class Cat {
 	}
 	
 	render () { this.sprite.render(); }
-}
-
-function scale (x, y, s) {
-    return kontra.vector(x * s, y *s);
-}
-
-function normalize (x, y) {
-    const magnitude = getMagnitude(x, y);
-	if (magnitude == 0) {
-		return kontra.vector(0,0);
-	}
-  return kontra.vector(x / magnitude, y / magnitude)
-}
-
-function getMagnitude (x, y) {
-    return Math.sqrt((x * x) + (y * y));
 }

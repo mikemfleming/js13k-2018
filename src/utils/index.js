@@ -45,3 +45,15 @@ export const getNewVectorP = vector => {
 
 	return vector;
 }
+
+export const scale = (x, y, s) => kontra.vector(x * s, y *s);
+
+export const normalize = (x, y) => {
+	const magnitude = Math.sqrt((x * x) + (y * y));
+	if (magnitude == 0) {
+		return kontra.vector(0,0);
+	}
+  return kontra.vector(x / magnitude, y / magnitude)
+}
+
+export const getMagnitude = (x, y) => Math.sqrt((x * x) + (y * y));
