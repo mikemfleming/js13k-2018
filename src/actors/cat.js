@@ -12,16 +12,28 @@ export default class Cat {
 			dy: 0,
 		});
 
-		this.speed = 100 / 60; // px per frame (ish)
+		this.speed = 200; // px per second (ish)
 	}
 
 	update ({ playerX, playerY }) {
-		const mToC = kontra.vector(playerX - this.sprite.x, playerY - this.sprite.y);
-		const nDir = normalize(mToC.x, mToC.y);
-		const vel = scale(nDir.x, nDir.y, this.speed);
-        
-		this.sprite.x += vel.x;
-		this.sprite.y += vel.y;
+		// Get the difference in position from Cat to Mouse. (I.e. the vector to add to Cat to get to Mouse)
+		const deltaPos = kontra.vector(playerX - this.sprite.x, playerY - this.sprite.y);
+		// Get the normalized direction from Cat to Mouse. (I.e. the vector pointint from Cat to Mouse with a magnitude of zero)
+		const direction = normalize(deltaPos.x, deltaPos.y);
+		// Convert the speed of the cat from px/sec to px/frame. 
+		const s = this.speed / 60;
+		// Calculate the 2D velocity of the Cat, using the normalized direction and the speed of the cat.
+		let vel = scale(direction.x, direction.y, s);
+
+		// Clamp the magnitude of the velocity so it is not greater than the distance of Cat to Mouse
+		if (getMagnitude(vel.x, vel.y) > getMagnitude(deltaPos.x, deltaPos.y))
+		{
+			vel = deltaPos;
+		}
+
+		// Apply the velocity to the Sprite.
+		this.sprite.dx = vel.x;
+		this.sprite.dy = vel.y;
 
 		this.sprite.update();
 	}
@@ -35,7 +47,11 @@ function scale (x, y, s) {
 
 function normalize (x, y) {
     const magnitude = getMagnitude(x, y);
-    return kontra.vector(x / magnitude, y / magnitude);
+	if (magnitude == 0) 
+	{
+		return kontra.vector(0,0);
+	}
+    return kontra.vector(x / magnitude, y / magnitude)
 }
 
 function getMagnitude (x, y) {
